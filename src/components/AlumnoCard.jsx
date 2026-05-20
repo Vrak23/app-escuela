@@ -1,45 +1,58 @@
 // src/components/AlumnoCard.jsx
 
-const AlumnoCard = ({ nombre, carrera, estado }) => {
+import { useState } from "react";
 
-  // Badge azul para Matriculado
-  const badgeColor =
-    estado === "Matriculado"
-      ? "bg-primary"
-      : "bg-secondary";
+const AlumnoCard = ({ nombre, carrera, estadoInicial, imagen }) => {
+
+  const [estado, setEstado] = useState(estadoInicial);
+
+  const isActive =
+    estado === "Matriculado" || estado === "matriculado";
+
+  const cambiarEstado = () => {
+    setEstado(isActive ? "Inactivo" : "Matriculado");
+  };
 
   return (
-    <div className="col-md-4 mb-3">
-      <div className="card shadow-sm h-100">
-        <div className="card-body">
+    <div className="col-lg-4 col-md-6 mb-4">
+      <div className="alumno-card h-100">
 
-          <h5 className="card-title text-primary">
-            {nombre}
-          </h5>
+        {/* Imagen */}
+        <div className="card-img-wrap">
+          <img src={imagen} alt={nombre} />
+        </div>
 
-          <h6 className="card-subtitle mb-2 text-muted">
-            {carrera}
-          </h6>
+        <div className="card-body d-flex flex-column">
 
-          <div className="d-flex justify-content-between align-items-center">
-
-            <span className={`badge ${badgeColor}`}>
-              {estado}
+          {/* Badge estado */}
+          <div className="mb-2">
+            <span className={`badge ${isActive ? "bg-info" : "bg-secondary"}`}>
+              {isActive ? "● Matriculado" : "○ Inactivo"}
             </span>
-
-            <div>
-              {/* Botón verde */}
-              <button className="btn btn-sm btn-outline-success me-2">
-                Editar
-              </button>
-
-              {/* Botón rojo */}
-              <button className="btn btn-sm btn-outline-danger">
-                Eliminar
-              </button>
-            </div>
-
           </div>
+
+          {/* Nombre */}
+          <h5 className="card-title mb-1">{nombre}</h5>
+
+          {/* Email */}
+          <p className="card-subtitle small mb-3">{carrera}</p>
+
+          {/* Botones */}
+          <div className="mt-auto d-flex gap-2">
+            <button
+              className="btn btn-outline-success btn-sm flex-fill"
+              onClick={cambiarEstado}
+            >
+              Estado
+            </button>
+            <button className="btn btn-success btn-sm flex-fill">
+              Editar
+            </button>
+            <button className="btn btn-outline-danger btn-sm px-3">
+              ✕
+            </button>
+          </div>
+
         </div>
       </div>
     </div>

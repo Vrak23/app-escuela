@@ -1,0 +1,316 @@
+@import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap');
+
+/* ── VARIABLES ─────────────────────────────────────── */
+:root {
+  --bg:         #0d0f14;
+  --bg2:        #13161e;
+  --bg3:        #1a1e2a;
+  --surface:    #1f2433;
+  --border:     #2a3048;
+  --cyan:       #00cfff;
+  --cyan-dim:   #00cfff33;
+  --cyan-glow:  0 0 18px #00cfff55;
+  --text:       #e8ecf4;
+  --text-dim:   #8a93a8;
+  --danger:     #ff4d6a;
+  --radius:     14px;
+  --radius-lg:  20px;
+}
+
+/* ── RESET / BASE ───────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Exo 2', sans-serif;
+  min-height: 100vh;
+
+  /* Subtle grid texture */
+  background-image:
+    linear-gradient(var(--border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--border) 1px, transparent 1px);
+  background-size: 40px 40px;
+  background-attachment: fixed;
+}
+
+/* ── SCROLLBAR ──────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg2); }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--cyan); }
+
+/* ── TITLE ──────────────────────────────────────────── */
+h1 {
+  font-family: 'Exo 2', sans-serif;
+  font-weight: 800;
+  font-size: 2.4rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--cyan);
+  text-shadow: var(--cyan-glow);
+  position: relative;
+}
+
+h1::after {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 3px;
+  background: var(--cyan);
+  margin: 10px auto 0;
+  border-radius: 2px;
+  box-shadow: var(--cyan-glow);
+}
+
+/* ── CONTAINER ──────────────────────────────────────── */
+.container {
+  max-width: 1200px;
+}
+
+/* ── CARDS (alumno) ─────────────────────────────────── */
+.alumno-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  position: relative;
+}
+
+.alumno-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, var(--cyan-dim) 0%, transparent 60%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.alumno-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 40px #00000088, var(--cyan-glow);
+  border-color: var(--cyan);
+}
+
+.alumno-card:hover::before {
+  opacity: 1;
+}
+
+.alumno-card .card-img-wrap {
+  position: relative;
+  overflow: hidden;
+  height: 200px;
+}
+
+.alumno-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+  filter: grayscale(20%);
+}
+
+.alumno-card:hover img {
+  transform: scale(1.06);
+  filter: grayscale(0%);
+}
+
+.alumno-card .card-img-wrap::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 60px;
+  background: linear-gradient(transparent, var(--surface));
+}
+
+.alumno-card .card-body {
+  background: transparent;
+  color: var(--text);
+  padding: 1.2rem 1.4rem 1.4rem;
+  position: relative;
+  z-index: 1;
+}
+
+.alumno-card .card-title {
+  font-family: 'Exo 2', sans-serif;
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: var(--cyan) !important;
+  letter-spacing: 0.5px;
+  text-shadow: 0 0 10px #00cfff44;
+  margin-bottom: 0.3rem;
+}
+
+.alumno-card .card-subtitle,
+.alumno-card .text-muted,
+.alumno-card .small {
+  color: var(--text-dim) !important;
+  font-size: 0.82rem;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* ── BADGES ─────────────────────────────────────────── */
+.badge {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 6px 14px;
+  border-radius: 999px;
+}
+
+.badge.bg-info {
+  background: var(--cyan-dim) !important;
+  color: var(--cyan) !important;
+  border: 1px solid var(--cyan);
+  box-shadow: 0 0 8px #00cfff33;
+}
+
+.badge.bg-secondary {
+  background: #2a2e3b !important;
+  color: var(--text-dim) !important;
+  border: 1px solid var(--border);
+}
+
+/* ── BUTTONS ─────────────────────────────────────────── */
+.btn {
+  font-family: 'Exo 2', sans-serif;
+  font-weight: 600;
+  font-size: 0.8rem;
+  letter-spacing: 0.5px;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+
+.btn-outline-success {
+  border: 1px solid var(--cyan);
+  color: var(--cyan);
+  background: transparent;
+}
+.btn-outline-success:hover {
+  background: var(--cyan);
+  color: #0d0f14;
+  box-shadow: var(--cyan-glow);
+}
+
+.btn-success {
+  background: var(--cyan);
+  border: none;
+  color: #0d0f14;
+  font-weight: 700;
+}
+.btn-success:hover {
+  background: #00b7e6;
+  box-shadow: var(--cyan-glow);
+  color: #0d0f14;
+}
+
+.btn-outline-danger {
+  border: 1px solid var(--danger);
+  color: var(--danger);
+  background: transparent;
+}
+.btn-outline-danger:hover {
+  background: var(--danger);
+  color: white;
+  box-shadow: 0 0 12px #ff4d6a55;
+}
+
+/* ── FORMULARIO (sin cambios de color base) ─────────── */
+.form-card-wrapper .card {
+  background: #fff;
+  border: none;
+  border-radius: var(--radius-lg);
+  box-shadow: 0 8px 32px #00000066;
+  overflow: hidden;
+}
+
+.form-card-wrapper .card-header {
+  background: #1f2433;
+  border-bottom: 2px solid var(--cyan);
+  padding: 1rem 1.5rem;
+}
+
+.form-card-wrapper .card-header h5 {
+  color: var(--cyan);
+  font-family: 'Exo 2', sans-serif;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.form-card-wrapper .card-body {
+  background: #fff;
+  color: #212529;
+}
+
+.form-card-wrapper .form-label {
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: #444;
+  letter-spacing: 0.4px;
+}
+
+.form-card-wrapper .form-control,
+.form-card-wrapper .form-select {
+  background: #f8f9fa;
+  border: 1.5px solid #dee2e6;
+  border-radius: 8px;
+  color: #212529;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  font-family: 'Exo 2', sans-serif;
+}
+
+.form-card-wrapper .form-control:focus,
+.form-card-wrapper .form-select:focus {
+  border-color: var(--cyan);
+  box-shadow: 0 0 0 3px #00cfff22;
+  background: #fff;
+  color: #212529;
+}
+
+.form-card-wrapper .btn-info {
+  background: var(--cyan);
+  border: none;
+  color: #0d0f14;
+  font-weight: 700;
+  font-family: 'Exo 2', sans-serif;
+  letter-spacing: 1px;
+  padding: 10px 32px;
+  border-radius: 10px;
+  transition: all 0.2s ease;
+}
+
+.form-card-wrapper .btn-info:hover {
+  background: #00b7e6;
+  box-shadow: var(--cyan-glow);
+  color: #0d0f14;
+  transform: translateY(-1px);
+}
+
+/* ── NAVBAR OVERRIDE ─────────────────────────────────── */
+.navbar {
+  background: #0d0f14 !important;
+  border-bottom: 1px solid var(--border);
+}
+
+/* ── ANIMATIONS ──────────────────────────────────────── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.alumno-card {
+  animation: fadeUp 0.4s ease both;
+}
+
+.col-lg-4:nth-child(1) .alumno-card { animation-delay: 0.05s; }
+.col-lg-4:nth-child(2) .alumno-card { animation-delay: 0.12s; }
+.col-lg-4:nth-child(3) .alumno-card { animation-delay: 0.19s; }
+.col-lg-4:nth-child(4) .alumno-card { animation-delay: 0.26s; }
+.col-lg-4:nth-child(5) .alumno-card { animation-delay: 0.33s; }
+.col-lg-4:nth-child(6) .alumno-card { animation-delay: 0.40s; }

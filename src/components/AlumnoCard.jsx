@@ -1,5 +1,3 @@
-// src/components/AlumnoCard.jsx
-
 import { useState } from "react";
 
 const AlumnoCard = ({ nombre, carrera, estadoInicial, imagen }) => {

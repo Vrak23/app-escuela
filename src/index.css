@@ -68,6 +68,10 @@ h1::after {
   max-width: 1200px;
 }
 
+.cursos-registrados-table tbody td {
+  color: #1f2937 !important;
+}
+
 /* ── CARDS (alumno) ─────────────────────────────────── */
 .alumno-card {
   background: var(--surface);
